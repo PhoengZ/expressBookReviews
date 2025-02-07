@@ -49,7 +49,8 @@ export async function regisUser(req,res){
 }
 export async function userReview(req,res) {
     let {username,cm,star} = req.body;
-    star = parseInt(star,10);
+    star = Number(star);
+    console.log(typeof(start));
     const isbn = req.params.isbn;
     const book = await books.find({ISBN:isbn});
     if (book.length != 0){

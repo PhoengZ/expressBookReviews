@@ -4,15 +4,7 @@ import * as userController from "../controller/userController.js";
 
 const regd_users = express.Router();
 
-
-
-regd_users.post("/register",userController.regisUser);
-regd_users.post("/login",userController.loginUser);
-regd_users.post("/logout",userController.logoutUser);
-regd_users.put("/review/:isbn",userController.userReview);
-regd_users.delete("/review/:isbn",userController.deleteReview);
-
-regd_users.use("/login", (req,res,next)=>{
+regd_users.use("/review/:isbn", (req,res,next)=>{
   if(req.session.authorization){
     console.log("pass authorized first in auth_user");
     let token = req.session.authorization['accessToken'];
@@ -28,4 +20,12 @@ regd_users.use("/login", (req,res,next)=>{
     });
   }
 });
+
+regd_users.post("/register",userController.regisUser);
+regd_users.post("/login",userController.loginUser);
+regd_users.post("/logout",userController.logoutUser);
+regd_users.put("/review/:isbn",userController.userReview);
+regd_users.delete("/review/:isbn",userController.deleteReview);
+
+
 export default regd_users;
